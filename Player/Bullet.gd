@@ -1,6 +1,7 @@
-extends Area2D
+extends KinematicBody2D
 
-var speed = 500
+var velocity = Vector2.ZERO
+var speed = 300
 
 func _physics_process(delta):
-	position += transform.x * speed * delta
+	move_and_collide(velocity.normalized() * delta * speed)

@@ -48,9 +48,8 @@ func process_shoot(delta):
 		bullet.position = GunPosition.global_position
 		bullet.velocity = bullet.velocity.move_toward(input_vector * bullet.speed, ACCELERATION * delta)
 		
-		# got a bug here - when player changes direction GunNode.rotation changes
-		print(GunNode.rotation)
-		bullet.rotate(GunNode.rotation)
+		var radians = fmod(input_vector.normalized().angle(), 2 * PI)
+		bullet.rotate(radians)
 		
 		get_tree().current_scene.add_child(bullet)
 		

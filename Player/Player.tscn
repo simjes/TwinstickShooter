@@ -16,9 +16,6 @@ height = 22.6667
 scale = Vector2( 0.2, 0.2 )
 collision_layer = 2
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 3 )

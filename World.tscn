@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/bg.jpg" type="Texture" id=2]
+[ext_resource path="res://World.gd" type="Script" id=3]
 
 [node name="World" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 143, 89 )
@@ -19,14 +21,15 @@ current = true
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 126, 67 )
-collision_mask = 33
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 32
-collision_mask = 0
+[node name="BulletDespawn" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BulletDespawn"]
 polygon = PoolVector2Array( -47, -32, 370, -33, 370, -43, -75, -40, -71, 237, 379, 237, 370, -32, 327, -33, 329, 210, -46, 212 )
+
+[connection signal="body_entered" from="BulletDespawn" to="." method="_on_BulletDespawn_body_entered"]

@@ -9,6 +9,19 @@ script/source = "extends KinematicBody2D
 
 onready var stats = $Stats
 
+export var ACCELERATION = 300
+export var MAX_SPEED = 50
+
+var velocity = Vector2.ZERO
+
+func _physics_process(delta):
+	var player_position = get_node(\"/root/World/Player\").position
+	var direction = global_position.direction_to(player_position)
+	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+
+	look_at(player_position)
+	velocity = move_and_slide(velocity)
+
 func _on_Stats_no_health():
 	queue_free()
 
@@ -47,10 +60,10 @@ collision_mask = 0
 script = SubResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+rotation = 3.92699
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 4 )
 animation = "Fly"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

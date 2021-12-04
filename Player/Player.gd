@@ -12,6 +12,10 @@ export var FRICTION = 500
 export var FIRE_DELAY = 0.1
 
 var velocity = Vector2.ZERO
+var stats = PlayerStats
+
+func _ready():
+	stats.connect("no_health", self, "queue_free")
 
 func _physics_process(delta):
 	process_move(delta)

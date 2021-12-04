@@ -19,6 +19,14 @@ current = true
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 126, 67 )
+collision_mask = 33
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( -47, -32, 370, -33, 370, -43, -75, -40, -71, 237, 379, 237, 370, -32, 327, -33, 329, 210, -46, 212 )

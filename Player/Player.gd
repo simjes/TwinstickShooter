@@ -6,11 +6,10 @@ onready var GunNode = $GunNode
 onready var GunPosition = $GunNode/GunPosition2D
 onready var GunTimer = $GunNode/Timer
 
-var can_shoot = true
-
 export var ACCELERATION = 500
 export var MAX_SPEED = 200
 export var FRICTION = 500
+export var FIRE_DELAY = 0.1
 
 var velocity = Vector2.ZERO
 
@@ -30,25 +29,21 @@ func process_move(delta):
 	velocity = move_and_slide(velocity)
 
 func process_shoot(delta):
-	if !can_shoot:
-		return
-	
 	var input_vector = Input.get_vector("shoot_left", "shoot_right", "shoot_up", "shoot_down")
-	if input_vector != Vector2.ZERO:
+	if input_vector != Vector2.ZERO and GunTimer.is_stopped():
 		# Pre Node2D - setting position based on player position + input vector
 #		GunPosition.global_position = global_position + input_vector.normalized() * GUN_DISTANCE
 		
-		# TODO: make reusable for upgraded weapons
-		can_shoot = false
-		GunTimer.start(.1)
+		GunTimer.start(FIRE_DELAY)
 		
+		# Rotates the pivot node
 		GunNode.look_at(global_position + input_vector.normalized())
 		
 		var bullet = Bullet.instance()
+		# in degrees: rotation_degrees = fmod(rotation_degrees, 360)
+		var radians = fmod(input_vector.normalized().angle(), TAU)
 		bullet.position = GunPosition.global_position
 		bullet.velocity = bullet.velocity.move_toward(input_vector * bullet.speed, ACCELERATION * delta)
-		
-		var radians = fmod(input_vector.normalized().angle(), 2 * PI)
 		bullet.rotate(radians)
 		
 		get_tree().current_scene.add_child(bullet)
@@ -56,6 +51,3 @@ func process_shoot(delta):
 	# Pre Node2D
 	#	else:
 	#		GunPosition.global_position = global_position
-
-func _on_Timer_timeout():
-	can_shoot = true

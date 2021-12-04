@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Camera2D
+
+onready var topLeft = $Limits/TopLeft
+onready var bottomRight = $Limits/BottomRight
+
+func _ready():
+	limit_top = topLeft.position.y
+	limit_left = topLeft.position.x
+	limit_bottom = bottomRight.position.y
+	limit_right = bottomRight.position.x
+"
+
+[node name="Camera2D" type="Camera2D"]
+position = Vector2( 160, 90 )
+scale = Vector2( 0.2, 0.2 )
+smoothing_enabled = true
+script = SubResource( 1 )
+
+[node name="Limits" type="Node" parent="."]
+
+[node name="TopLeft" type="Position2D" parent="Limits"]
+position = Vector2( 320, 180 )
+
+[node name="BottomRight" type="Position2D" parent="Limits"]

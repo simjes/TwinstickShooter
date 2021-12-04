@@ -1,24 +1,31 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/bg.jpg" type="Texture" id=2]
+[ext_resource path="res://Camera2D.tscn" type="PackedScene" id=3]
 
 [node name="World" type="Node2D"]
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 143, 89 )
-scale = Vector2( 0.333008, 0.333008 )
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 160, 106 )
+scale = Vector2( 0.350715, 0.333008 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 93, 131, 1100, 864 )
+region_rect = Rect2( 5, 31, 1254, 957 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 126, 67 )
-scale = Vector2( 0.2, 0.2 )
-current = true
+[node name="Camera2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( 190, 100 )
+
+[node name="TopLeft" parent="Camera2D/Limits" index="0"]
+position = Vector2( -60, -20 )
+
+[node name="BottomRight" parent="Camera2D/Limits" index="1"]
+position = Vector2( 380, 200 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 126, 67 )
+position = Vector2( 190, 100 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
+
+[editable path="Camera2D"]

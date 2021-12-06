@@ -55,3 +55,6 @@ func process_shoot(delta):
 	# Pre Node2D
 	#	else:
 	#		GunPosition.global_position = global_position
+
+func _on_Hurtbox_area_entered(area):
+	stats.health -= area.damage

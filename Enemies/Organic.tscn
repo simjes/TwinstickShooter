@@ -1,13 +1,15 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Enemies/Organic.png" type="Texture" id=1]
 [ext_resource path="res://Stats.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Hurtbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Hitbox.tscn" type="PackedScene" id=4]
 
 [sub_resource type="GDScript" id=5]
 script/source = "extends KinematicBody2D
 
 onready var stats = $Stats
+onready var player = get_node(\"/root/World/Player\")
 
 export var ACCELERATION = 300
 export var MAX_SPEED = 50
@@ -15,7 +17,10 @@ export var MAX_SPEED = 50
 var velocity = Vector2.ZERO
 
 func _physics_process(delta):
-	var player_position = get_node(\"/root/World/Player\").position
+	if !is_instance_valid(player):
+		return
+	
+	var player_position = player.position
 	var direction = global_position.direction_to(player_position)
 	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 
@@ -27,7 +32,6 @@ func _on_Stats_no_health():
 
 func _on_Hurtbox_body_entered(body):
 	stats.health -= 1
-	
 "
 
 [sub_resource type="AtlasTexture" id=2]
@@ -54,6 +58,9 @@ radius = 6.08276
 [sub_resource type="CircleShape2D" id=6]
 radius = 6.0
 
+[sub_resource type="CircleShape2D" id=7]
+radius = 6.0
+
 [node name="Organic" type="KinematicBody2D"]
 collision_layer = 16
 collision_mask = 0
@@ -78,7 +85,15 @@ collision_mask = 0
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource( 6 )
 
+[node name="Hitbox" parent="." instance=ExtResource( 4 )]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 7 )
+
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
 
 [editable path="Hurtbox"]
+[editable path="Hitbox"]

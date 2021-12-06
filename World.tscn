@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/bg.jpg" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://World/Boundaries.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World.gd" type="Script" id=5]
 [ext_resource path="res://Enemies/EnemySpawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 236, 10 )
@@ -65,6 +66,11 @@ shape = SubResource( 4 )
 [node name="OrganicEnemySpawner" parent="." instance=ExtResource( 6 )]
 position = Vector2( 101, 54 )
 EnemyPath = "res://Enemies/Organic.tscn"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 7 )]
+anchor_right = 5.0
 
 [editable path="Camera2D"]
 [editable path="Boundaries"]

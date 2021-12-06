@@ -16,6 +16,11 @@ export var MAX_SPEED = 50
 
 var velocity = Vector2.ZERO
 
+func _ready():
+	if !is_instance_valid(player):
+		return
+	player.connect(\"player_hit\", self, \"death\")
+
 func _physics_process(delta):
 	if !is_instance_valid(player):
 		return
@@ -27,8 +32,11 @@ func _physics_process(delta):
 	look_at(player_position)
 	velocity = move_and_slide(velocity)
 
-func _on_Stats_no_health():
+func death():
 	queue_free()
+
+func _on_Stats_no_health():
+	death()
 
 func _on_Hurtbox_body_entered(body):
 	stats.health -= 1
@@ -71,7 +79,6 @@ rotation = 3.92699
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 4 )
 animation = "Fly"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

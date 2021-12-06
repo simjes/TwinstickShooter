@@ -14,6 +14,8 @@ export var FIRE_DELAY = 0.1
 var velocity = Vector2.ZERO
 var stats = PlayerStats
 
+signal player_hit
+
 func _ready():
 	stats.connect("no_health", self, "queue_free")
 
@@ -58,3 +60,4 @@ func process_shoot(delta):
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
+	emit_signal("player_hit")

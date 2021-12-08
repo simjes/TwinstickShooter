@@ -1,15 +1,18 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Enemies/Organic.png" type="Texture" id=1]
 [ext_resource path="res://Stats.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Hitbox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Enemies/SoftCollision.tscn" type="PackedScene" id=5]
 
 [sub_resource type="GDScript" id=5]
 script/source = "extends KinematicBody2D
 
 onready var stats = $Stats
 onready var player = get_node(\"/root/World/Player\")
+onready var softCollision = $SoftCollision
+onready var score = get_node(\"/root/World/CanvasLayer/ScoreUI\")
 
 export var ACCELERATION = 300
 export var MAX_SPEED = 50
@@ -30,6 +33,10 @@ func _physics_process(delta):
 	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 
 	look_at(player_position)
+	
+	if (softCollision.is_colliding()):
+		velocity += softCollision.get_push_vector() * delta * 400
+	
 	velocity = move_and_slide(velocity)
 
 func death():
@@ -38,8 +45,9 @@ func death():
 func _on_Stats_no_health():
 	death()
 
-func _on_Hurtbox_body_entered(body):
+func _on_Hurtbox_body_entered(_body):
 	stats.health -= 1
+	score.emit_signal(\"add_score\", stats.points)
 "
 
 [sub_resource type="AtlasTexture" id=2]
@@ -67,6 +75,9 @@ radius = 6.08276
 radius = 6.0
 
 [sub_resource type="CircleShape2D" id=7]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id=8]
 radius = 6.0
 
 [node name="Organic" type="KinematicBody2D"]
@@ -100,8 +111,14 @@ collision_mask = 4
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 7 )
 
+[node name="SoftCollision" parent="." instance=ExtResource( 5 )]
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+shape = SubResource( 8 )
+
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
 
 [editable path="Hurtbox"]
 [editable path="Hitbox"]
+[editable path="SoftCollision"]

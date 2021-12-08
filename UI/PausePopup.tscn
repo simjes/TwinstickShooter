@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://PausePopup.gd" type="Script" id=1]
+
+[node name="PausePopup" type="PopupMenu"]
+pause_mode = 2
+visible = true
+margin_right = 112.0
+margin_bottom = 96.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseTitle" type="Label" parent="."]
+margin_left = 33.0
+margin_top = 7.976
+margin_right = 97.0
+margin_bottom = 21.976
+text = "Paused"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resume" type="Button" parent="."]
+margin_left = 24.0
+margin_top = 32.336
+margin_right = 88.0
+margin_bottom = 52.336
+text = "Resume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit" type="Button" parent="."]
+margin_left = 24.0
+margin_top = 64.0
+margin_right = 88.0
+margin_bottom = 84.0
+text = "Exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_Exit_pressed"]

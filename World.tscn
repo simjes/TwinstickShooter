@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/bg.jpg" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://World.gd" type="Script" id=5]
 [ext_resource path="res://Enemies/EnemySpawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://UI/PausePopup.tscn" type="PackedScene" id=8]
+[ext_resource path="res://UI/ScoreUI.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 236, 10 )
@@ -71,6 +73,11 @@ EnemyPath = "res://Enemies/Organic.tscn"
 
 [node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 7 )]
 anchor_right = 5.0
+
+[node name="ScoreUI" parent="CanvasLayer" instance=ExtResource( 9 )]
+
+[node name="PausePopup" parent="CanvasLayer" instance=ExtResource( 8 )]
+visible = false
 
 [editable path="Camera2D"]
 [editable path="Boundaries"]

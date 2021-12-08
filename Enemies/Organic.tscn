@@ -9,10 +9,10 @@
 [sub_resource type="GDScript" id=5]
 script/source = "extends KinematicBody2D
 
-onready var stats = $Stats
 onready var player = get_node(\"/root/World/Player\")
-onready var softCollision = $SoftCollision
 onready var score = get_node(\"/root/World/CanvasLayer/ScoreUI\")
+onready var stats = $Stats
+onready var softCollision = $SoftCollision
 
 export var ACCELERATION = 300
 export var MAX_SPEED = 50
@@ -22,7 +22,7 @@ var velocity = Vector2.ZERO
 func _ready():
 	if !is_instance_valid(player):
 		return
-	player.connect(\"player_hit\", self, \"death\")
+	player.connect(\"player_hit\", self, \"queue_free\")
 
 func _physics_process(delta):
 	if !is_instance_valid(player):
@@ -37,13 +37,12 @@ func _physics_process(delta):
 	if (softCollision.is_colliding()):
 		velocity += softCollision.get_push_vector() * delta * 400
 	
+	# TODO: avoid bullets
+	
 	velocity = move_and_slide(velocity)
 
-func death():
-	queue_free()
-
 func _on_Stats_no_health():
-	death()
+	queue_free()
 
 func _on_Hurtbox_body_entered(_body):
 	stats.health -= 1
@@ -90,12 +89,14 @@ rotation = 3.92699
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 4 )
 animation = "Fly"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="Stats" parent="." instance=ExtResource( 2 )]
+points = 50
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 collision_layer = 8

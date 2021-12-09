@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/bg.jpg" type="Texture" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/PausePopup.tscn" type="PackedScene" id=8]
 [ext_resource path="res://UI/ScoreUI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Enemies/SpaceBird.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Enemies/Organic.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 236, 10 )
@@ -83,10 +85,16 @@ shape = SubResource( 4 )
 
 [node name="OrganicEnemySpawner" parent="." instance=ExtResource( 6 )]
 position = Vector2( 101, 54 )
-EnemyPath = "res://Enemies/Organic.tscn"
+Enemies = [ ExtResource( 11 ) ]
 
 [node name="SpaceBirdEnemySpawner" parent="." instance=ExtResource( 6 )]
-EnemyPath = "res://Enemies/SpaceBird.tscn"
+Enemies = [ ExtResource( 10 ) ]
+
+[node name="MegaSpawner" parent="." instance=ExtResource( 6 )]
+position = Vector2( 101, 54 )
+waitTime = 15.0
+numberOfSpawns = 10
+Enemies = [ ExtResource( 11 ), ExtResource( 10 ) ]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

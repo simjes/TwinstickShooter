@@ -21,6 +21,5 @@ func spawn_enemy():
 	else:
 		enemy.position = global_position
 
-
 func _on_Timer_timeout():
 	spawn_enemy()

@@ -4,6 +4,7 @@ onready var player = get_node("/root/World/Player")
 onready var score = get_node("/root/World/CanvasLayer/ScoreUI")
 onready var stats = $Stats
 onready var softCollision = $SoftCollision
+onready var bulletDodge = $BulletDodge
 
 export var ACCELERATION = 500
 export var MAX_SPEED = 200
@@ -21,14 +22,16 @@ func _physics_process(delta):
 	
 	var player_position = player.position
 	var direction = global_position.direction_to(player_position)
-	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+	
+	if (bulletDodge.is_colliding()):
+		velocity += bulletDodge.get_push_vector() * delta * 2000
+	else: 
+		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 
 	look_at(player_position)
 	
 	if (softCollision.is_colliding()):
 		velocity += softCollision.get_push_vector() * delta * 400
-	
-	# TODO: dodge bullets
 	
 	velocity = move_and_slide(velocity)
 

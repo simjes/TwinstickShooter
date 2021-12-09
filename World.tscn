@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/bg.jpg" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/PausePopup.tscn" type="PackedScene" id=8]
 [ext_resource path="res://UI/ScoreUI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Enemies/SpaceBird.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 236, 10 )
@@ -49,17 +50,29 @@ remote_path = NodePath("../../Camera2D")
 
 [node name="Boundaries" parent="." instance=ExtResource( 4 )]
 
+[node name="BoundaryTop" parent="Boundaries" index="0"]
+collision_mask = 18
+
 [node name="CollisionShape2D" parent="Boundaries/BoundaryTop" index="0"]
 position = Vector2( 157, -31 )
 shape = SubResource( 1 )
+
+[node name="BoundaryLeft" parent="Boundaries" index="1"]
+collision_mask = 18
 
 [node name="CollisionShape2D" parent="Boundaries/BoundaryLeft" index="0"]
 position = Vector2( -70, 97.5 )
 shape = SubResource( 2 )
 
+[node name="BoundaryBottom" parent="Boundaries" index="2"]
+collision_mask = 18
+
 [node name="CollisionShape2D" parent="Boundaries/BoundaryBottom" index="0"]
 position = Vector2( 158, 210 )
 shape = SubResource( 3 )
+
+[node name="BoundaryRight" parent="Boundaries" index="3"]
+collision_mask = 18
 
 [node name="CollisionShape2D" parent="Boundaries/BoundaryRight" index="0"]
 position = Vector2( 390, 91 )
@@ -67,7 +80,10 @@ shape = SubResource( 4 )
 
 [node name="OrganicEnemySpawner" parent="." instance=ExtResource( 6 )]
 position = Vector2( 101, 54 )
-EnemyPath = "res://Enemies/Organic.tscn"
+script = null
+
+[node name="SpaceBirdEnemySpawner" parent="." instance=ExtResource( 6 )]
+script = null
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -79,9 +95,14 @@ anchor_right = 5.0
 [node name="PausePopup" parent="CanvasLayer" instance=ExtResource( 8 )]
 visible = false
 
+[node name="SpaceBird" parent="." instance=ExtResource( 10 )]
+position = Vector2( 157, 124 )
+
 [editable path="Camera2D"]
 [editable path="Boundaries"]
 [editable path="Boundaries/BoundaryTop"]
 [editable path="Boundaries/BoundaryLeft"]
 [editable path="Boundaries/BoundaryBottom"]
 [editable path="Boundaries/BoundaryRight"]
+[editable path="OrganicEnemySpawner"]
+[editable path="SpaceBirdEnemySpawner"]

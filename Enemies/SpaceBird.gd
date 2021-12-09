@@ -7,7 +7,7 @@ onready var softCollision = $SoftCollision
 onready var bulletDodge = $BulletDodge
 
 export var ACCELERATION = 500
-export var MAX_SPEED = 200
+export var MAX_SPEED = 150
 
 var velocity = Vector2.ZERO
 
@@ -24,7 +24,7 @@ func _physics_process(delta):
 	var direction = global_position.direction_to(player_position)
 	
 	if (bulletDodge.is_colliding()):
-		velocity += bulletDodge.get_push_vector() * delta * 2000
+		velocity += bulletDodge.get_push_vector() * delta * 1000
 	else: 
 		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 

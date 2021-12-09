@@ -12,5 +12,5 @@ func _ready():
 	var bottomLeft = Vector2(topLeft.x, bottomRight.y)
 	var topRight = Vector2(bottomRight.x, topLeft.y)
 	
-#	OrganicEnemySpawner.spawnPoints = [topLeft, bottomRight, bottomLeft, topRight]
-#	SpaceBirdEnemySpawner.spawnPoints = [topLeft, bottomRight, bottomLeft, topRight]
+	OrganicEnemySpawner.spawnPoints = [topLeft, bottomRight, bottomLeft, topRight]
+	SpaceBirdEnemySpawner.spawnPoints = [topLeft, bottomRight, bottomLeft, topRight]

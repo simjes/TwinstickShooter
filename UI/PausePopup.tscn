@@ -1,11 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://PausePopup.gd" type="Script" id=1]
+[ext_resource path="res://UI/lazer_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://UI/LogoText.tscn" type="PackedScene" id=3]
 
 [node name="PausePopup" type="Popup"]
 pause_mode = 2
-margin_right = 112.0
-margin_bottom = 96.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -19,38 +21,29 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 24.0
-margin_top = 17.0
-margin_right = 88.0
-margin_bottom = 79.0
+margin_left = 129.0
+margin_top = 57.0
+margin_right = 191.0
+margin_bottom = 122.0
 alignment = 1
 
-[node name="PauseTitle" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_right = 64.0
-margin_bottom = 14.0
+[node name="Title" parent="CenterContainer/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 0.0
+margin_right = 62.0
+margin_bottom = 19.0
 text = "Paused"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Resume" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 18.0
-margin_right = 64.0
-margin_bottom = 38.0
+[node name="Resume" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 23.0
+margin_right = 62.0
+margin_bottom = 42.0
+custom_fonts/font = ExtResource( 2 )
 text = "Resume"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Exit" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 42.0
-margin_right = 64.0
-margin_bottom = 62.0
-text = "Exit"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
+[node name="Quit" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 46.0
+margin_right = 62.0
+margin_bottom = 65.0
+custom_fonts/font = ExtResource( 2 )
+text = "Quit"
+align = 1

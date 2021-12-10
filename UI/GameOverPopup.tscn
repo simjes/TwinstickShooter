@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/LogoText.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/lazer_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://UI/GameOverPopup.gd" type="Script" id=3]
+
+[node name="GameOverPopup" type="Popup"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 107.0
+margin_top = 48.0
+margin_right = 212.0
+margin_bottom = 131.0
+
+[node name="Title" parent="CenterContainer/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 0.0
+margin_right = 105.0
+margin_bottom = 19.0
+text = "Game Over"
+
+[node name="Score" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 23.0
+margin_right = 105.0
+margin_bottom = 37.0
+text = "Score"
+align = 1
+
+[node name="PlayAgain" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 41.0
+margin_right = 105.0
+margin_bottom = 60.0
+custom_fonts/font = ExtResource( 2 )
+text = "Play again"
+align = 1
+
+[node name="Quit" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 64.0
+margin_right = 105.0
+margin_bottom = 83.0
+custom_fonts/font = ExtResource( 2 )
+text = "Quit"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

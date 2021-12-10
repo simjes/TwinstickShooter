@@ -7,6 +7,9 @@ onready var GunPosition = $GunNode/GunPosition2D
 onready var GunTimer = $GunNode/Timer
 onready var hurtBox = $Hurtbox
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
+onready var canvasLayer = get_node("/root/World/CanvasLayer")
+
+var GameOverScene = preload("res://UI/GameOverPopup.tscn")
 
 export var ACCELERATION = 500
 export var MAX_SPEED = 200
@@ -19,7 +22,7 @@ var stats = PlayerStats
 signal player_hit
 
 func _ready():
-	stats.connect("no_health", self, "queue_free")
+	stats.connect("no_health", self, "player_death")
 
 func _physics_process(delta):
 	process_move(delta)
@@ -60,6 +63,12 @@ func process_shoot(delta):
 	#	else:
 	#		GunPosition.global_position = global_position
 
+func player_death():
+	queue_free()
+	get_tree().paused = true
+	var game_over = GameOverScene.instance()
+	canvasLayer.add_child(game_over)
+	
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
 	

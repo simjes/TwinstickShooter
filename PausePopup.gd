@@ -1,4 +1,4 @@
-extends PopupMenu
+extends Popup
 
 onready var Resume = $Resume
 onready var Restart = $Restart

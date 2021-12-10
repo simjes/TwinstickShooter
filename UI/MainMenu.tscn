@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://World/bg.jpg" type="Texture" id=1]
 [ext_resource path="res://UI/menu.png" type="Texture" id=2]
 [ext_resource path="res://UI/lazer_font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://UI/MainMenu.gd" type="Script" id=4]
+[ext_resource path="res://UI/LogoText.tscn" type="PackedScene" id=5]
 
 [node name="MarginContainer" type="MarginContainer"]
 anchor_right = 1.0
@@ -31,15 +32,7 @@ margin_right = 120.0
 margin_bottom = 200.0
 alignment = 1
 
-[node name="Title" type="Label" parent="HBoxContainer/VBoxContainer"]
-margin_top = 67.0
-margin_right = 120.0
-margin_bottom = 86.0
-custom_colors/font_color = Color( 0.909804, 0.223529, 0.223529, 1 )
-custom_colors/font_color_shadow = Color( 1, 0.909804, 0.909804, 1 )
-custom_fonts/font = ExtResource( 3 )
-text = "Spacer Shot"
-align = 1
+[node name="Title" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 5 )]
 
 [node name="MenuOptions" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
 margin_top = 90.0

@@ -29,6 +29,7 @@ func _input(_event):
 		
 func select_menu_option(index):
 	if index == 0:
+		PlayerStats.reset()
 		get_tree().reload_current_scene()
 		get_tree().paused = false
 	

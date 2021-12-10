@@ -40,6 +40,8 @@ align = 1
 margin_top = 41.0
 margin_right = 107.0
 margin_bottom = 60.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 2 )
 text = "Play again"
 align = 1
@@ -48,9 +50,14 @@ align = 1
 margin_top = 64.0
 margin_right = 107.0
 margin_bottom = 83.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 2 )
 text = "Quit"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="gui_input" from="CenterContainer/VBoxContainer/PlayAgain" to="." method="_on_PlayAgain_gui_input"]
+[connection signal="gui_input" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_gui_input"]

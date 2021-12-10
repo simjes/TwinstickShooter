@@ -37,6 +37,8 @@ text = "Paused"
 margin_top = 23.0
 margin_right = 62.0
 margin_bottom = 42.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 2 )
 text = "Resume"
 
@@ -44,6 +46,11 @@ text = "Resume"
 margin_top = 46.0
 margin_right = 62.0
 margin_bottom = 65.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 2 )
 text = "Quit"
 align = 1
+
+[connection signal="gui_input" from="CenterContainer/VBoxContainer/Resume" to="." method="_on_Resume_gui_input"]
+[connection signal="gui_input" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_gui_input"]

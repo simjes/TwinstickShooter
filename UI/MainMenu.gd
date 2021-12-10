@@ -20,13 +20,13 @@ func _input(_event):
 		hover_menu_option(index)
 		
 	if Input.is_action_just_pressed("ui_accept"):
-		select_menu_option()
+		select_menu_option(hover_index)
 		
-func select_menu_option():
-	if hover_index == 0:
+func select_menu_option(index):
+	if index == 0:
 		get_tree().change_scene("res://World.tscn")
 	
-	if hover_index == 1:
+	if index == 1:
 		get_tree().quit()
 	
 func hover_menu_option(new_index):
@@ -39,3 +39,11 @@ func reset_selected_option(index):
 
 func set_selected_option(index):
 	menu_options[index].add_color_override("font_color", Color.aqua)
+
+func _on_Start_gui_input(event):
+	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
+		select_menu_option(0)
+
+func _on_Quit_gui_input(event):
+	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
+		select_menu_option(1)

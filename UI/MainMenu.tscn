@@ -49,6 +49,8 @@ alignment = 1
 [node name="Start" type="Label" parent="HBoxContainer/VBoxContainer/MenuOptions"]
 margin_right = 120.0
 margin_bottom = 19.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 3 )
 text = "Start"
 
@@ -56,6 +58,8 @@ text = "Start"
 margin_top = 24.0
 margin_right = 120.0
 margin_bottom = 43.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 3 )
 text = "Quit"
 __meta__ = {
@@ -73,3 +77,6 @@ size_flags_vertical = 3
 margin_right = 200.0
 margin_bottom = 200.0
 texture = ExtResource( 2 )
+
+[connection signal="gui_input" from="HBoxContainer/VBoxContainer/MenuOptions/Start" to="." method="_on_Start_gui_input"]
+[connection signal="gui_input" from="HBoxContainer/VBoxContainer/MenuOptions/Quit" to="." method="_on_Quit_gui_input"]

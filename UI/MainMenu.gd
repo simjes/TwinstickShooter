@@ -3,6 +3,7 @@ extends MarginContainer
 onready var Start = $HBoxContainer/VBoxContainer/MenuOptions/Start
 onready var Quit = $HBoxContainer/VBoxContainer/MenuOptions/Quit
 onready var menu_options = [Start, Quit]
+onready var max_index = menu_options.size() -1
 
 var hover_index = 0
 
@@ -11,14 +12,12 @@ func _ready():
 
 func _input(_event):
 	if Input.is_action_just_pressed("ui_up"):
-		var index = clamp(hover_index - 1, 0, menu_options.size())
+		var index = clamp(hover_index - 1, 0, max_index)
 		hover_menu_option(index)
-		return
 		
 	if Input.is_action_just_pressed("ui_down"):
-		var index = clamp(hover_index + 1, 0, menu_options.size())
+		var index = clamp(hover_index + 1, 0, max_index)
 		hover_menu_option(index)
-		return
 		
 	if Input.is_action_just_pressed("ui_accept"):
 		select_menu_option()

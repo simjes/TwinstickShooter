@@ -104,7 +104,6 @@ anchor_right = 5.0
 [node name="ScoreUI" parent="CanvasLayer" instance=ExtResource( 9 )]
 
 [node name="PausePopup" parent="CanvasLayer" instance=ExtResource( 8 )]
-visible = false
 
 [editable path="Camera2D"]
 [editable path="Boundaries"]

@@ -4,7 +4,6 @@
 
 [node name="PausePopup" type="PopupMenu"]
 pause_mode = 2
-visible = true
 margin_right = 112.0
 margin_bottom = 96.0
 script = ExtResource( 1 )

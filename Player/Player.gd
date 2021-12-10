@@ -5,6 +5,8 @@ const Bullet = preload("res://Player/Bullet.tscn")
 onready var GunNode = $GunNode
 onready var GunPosition = $GunNode/GunPosition2D
 onready var GunTimer = $GunNode/Timer
+onready var hurtBox = $Hurtbox
+onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 
 export var ACCELERATION = 500
 export var MAX_SPEED = 200
@@ -60,4 +62,14 @@ func process_shoot(delta):
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
+	
+	hurtBox.start_invincibility(0.5)
+#	hurtBox.create_hit_effect()
+	
 	emit_signal("player_hit")
+
+func _on_Hurtbox_invincibility_ended():
+	blinkAnimationPlayer.play("Stop")
+
+func _on_Hurtbox_invincibility_started():
+	blinkAnimationPlayer.play("Start")

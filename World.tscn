@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/bg.jpg" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://UI/ScoreUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Enemies/SpaceBird.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Enemies/Organic.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Music/03_racing_through_asteroids_loop.ogg" type="AudioStream" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 236, 10 )
@@ -26,6 +27,10 @@ extents = Vector2( 10, 128 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+autoplay = true
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 160, 106 )

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://World/bg.jpg" type="Texture" id=1]
 [ext_resource path="res://UI/menu.png" type="Texture" id=2]
 [ext_resource path="res://UI/lazer_font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://UI/MainMenu.gd" type="Script" id=4]
 [ext_resource path="res://UI/LogoText.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Music/06_battle_in_space_loop.ogg" type="AudioStream" id=6]
 
 [node name="MarginContainer" type="MarginContainer"]
 anchor_right = 1.0
@@ -14,6 +15,10 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 160, 106 )

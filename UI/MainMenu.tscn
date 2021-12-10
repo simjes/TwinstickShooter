@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://World/bg.jpg" type="Texture" id=1]
+[ext_resource path="res://UI/menu.png" type="Texture" id=2]
+[ext_resource path="res://UI/lazer_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://UI/MainMenu.gd" type="Script" id=4]
+
+[node name="MarginContainer" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 160, 106 )
+scale = Vector2( 0.350715, 0.333008 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 5, 31, 1254, 957 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 324.0
+margin_bottom = 200.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 120.0
+margin_bottom = 200.0
+alignment = 1
+
+[node name="Title" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 67.0
+margin_right = 120.0
+margin_bottom = 86.0
+custom_colors/font_color = Color( 0.909804, 0.223529, 0.223529, 1 )
+custom_colors/font_color_shadow = Color( 1, 0.909804, 0.909804, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "Spacer Shot"
+align = 1
+
+[node name="MenuOptions" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 90.0
+margin_right = 120.0
+margin_bottom = 133.0
+custom_constants/separation = 5
+alignment = 1
+
+[node name="Start" type="Label" parent="HBoxContainer/VBoxContainer/MenuOptions"]
+margin_right = 120.0
+margin_bottom = 19.0
+custom_fonts/font = ExtResource( 3 )
+text = "Start"
+
+[node name="Quit" type="Label" parent="HBoxContainer/VBoxContainer/MenuOptions"]
+margin_top = 24.0
+margin_right = 120.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 3 )
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+margin_left = 124.0
+margin_right = 324.0
+margin_bottom = 200.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/CenterContainer"]
+margin_right = 200.0
+margin_bottom = 200.0
+texture = ExtResource( 2 )

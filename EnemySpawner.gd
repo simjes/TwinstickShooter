@@ -1,10 +1,10 @@
 extends Node2D
 
-onready var timer = $Timer
+@onready var timer = $Timer
 
-export(float) var waitTime = 3
-export(int) var numberOfSpawns = 1
-export (Array, PackedScene) var Enemies = []
+@export var waitTime: float = 3
+@export var numberOfSpawns: int = 1
+@export var Enemies: Array[PackedScene] = []
 var spawnPoints = []
 
 func _ready():
@@ -15,7 +15,7 @@ func spawn_enemy():
 	var Enemy = Enemies[randi() % Enemies.size()]
 	
 	for i in numberOfSpawns:
-		var enemy = Enemy.instance()
+		var enemy = Enemy.instantiate()
 		get_tree().current_scene.call_deferred("add_child", enemy)
 		
 		if spawnPoints.size() > 0:

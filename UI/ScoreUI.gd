@@ -1,7 +1,7 @@
 extends Control
 
-onready var player = get_node("/root/World/Player")
-onready var label = $Label
+@onready var player = get_node("/root/World/Player")
+@onready var label = $Label
 var score = 0
 var kill_combo = 0
 var score_multiplier = 1
@@ -9,8 +9,8 @@ var score_multiplier = 1
 signal add_score(points)
 
 func _ready():
-	label.text = String(score)
-	player.connect("player_hit", self, "reset_multiplier")
+	label.text = str(score)
+	player.connect("player_hit", Callable(self, "reset_multiplier"))
 	
 func reset_multiplier():
 	kill_combo = 0
@@ -31,6 +31,6 @@ func set_score_multiplier():
 
 func _on_ScoreUI_add_score(points):
 	score += points * score_multiplier
-	label.text = String(score)
+	label.text = str(score)
 	kill_combo += 1
 	set_score_multiplier()

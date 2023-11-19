@@ -1,20 +1,18 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var player = get_node("/root/World/Player")
-onready var score = get_node("/root/World/CanvasLayer/ScoreUI")
-onready var stats = $Stats
-onready var softCollision = $SoftCollision
-onready var bulletDodge = $BulletDodge
+@onready var player = get_node("/root/World/Player")
+@onready var score = get_node("/root/World/CanvasLayer/ScoreUI")
+@onready var stats = $Stats
+@onready var softCollision = $SoftCollision
+@onready var bulletDodge = $BulletDodge
 
-export var ACCELERATION = 500
-export var MAX_SPEED = 150
-
-var velocity = Vector2.ZERO
+@export var ACCELERATION = 500
+@export var MAX_SPEED = 150
 
 func _ready():
 	if !is_instance_valid(player):
 		return
-	player.connect("player_hit", self, "queue_free")
+	player.connect("player_hit", Callable(self, "queue_free"))
 
 func _physics_process(delta):
 	if !is_instance_valid(player):
@@ -33,7 +31,9 @@ func _physics_process(delta):
 	if (softCollision.is_colliding()):
 		velocity += softCollision.get_push_vector() * delta * 400
 	
-	velocity = move_and_slide(velocity)
+	set_velocity(velocity)
+	move_and_slide()
+	velocity = velocity
 
 func _on_Stats_no_health():
 	queue_free()

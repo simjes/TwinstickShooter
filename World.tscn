@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://World/bg.jpg" type="Texture" id=2]
+[ext_resource path="res://World/bg.jpg" type="Texture2D" id=2]
 [ext_resource path="res://Camera2D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://World/Boundaries.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World.gd" type="Script" id=5]
@@ -14,16 +14,16 @@
 [ext_resource path="res://Music/03_racing_through_asteroids_loop.ogg" type="AudioStream" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 236, 10 )
+size = Vector2( 236, 10 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 10, 127.5 )
+size = Vector2( 10, 127.5 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 237, 10 )
+size = Vector2( 237, 10 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 10, 128 )
+size = Vector2( 10, 128 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 5 )
@@ -32,7 +32,7 @@ script = ExtResource( 5 )
 stream = ExtResource( 12 )
 autoplay = true
 
-[node name="Background" type="Sprite" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 position = Vector2( 160, 106 )
 scale = Vector2( 0.350715, 0.333008 )
 texture = ExtResource( 2 )

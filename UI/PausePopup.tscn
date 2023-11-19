@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://PausePopup.gd" type="Script" id=1]
-[ext_resource path="res://UI/lazer_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://UI/lazer_font.tres" type="FontFile" id=2]
 [ext_resource path="res://UI/LogoText.tscn" type="PackedScene" id=3]
 
 [node name="PausePopup" type="Popup"]
-pause_mode = 2
+process_mode = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -21,34 +21,34 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 129.0
-margin_top = 57.0
-margin_right = 191.0
-margin_bottom = 122.0
+offset_left = 129.0
+offset_top = 57.0
+offset_right = 191.0
+offset_bottom = 122.0
 alignment = 1
 
 [node name="Title" parent="CenterContainer/VBoxContainer" instance=ExtResource( 3 )]
-margin_top = 0.0
-margin_right = 62.0
-margin_bottom = 19.0
+offset_top = 0.0
+offset_right = 62.0
+offset_bottom = 19.0
 text = "Paused"
 
 [node name="Resume" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_top = 23.0
-margin_right = 62.0
-margin_bottom = 42.0
+offset_top = 23.0
+offset_right = 62.0
+offset_bottom = 42.0
 mouse_filter = 0
 mouse_default_cursor_shape = 2
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "Resume"
 
 [node name="Quit" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_top = 46.0
-margin_right = 62.0
-margin_bottom = 65.0
+offset_top = 46.0
+offset_right = 62.0
+offset_bottom = 65.0
 mouse_filter = 0
 mouse_default_cursor_shape = 2
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "Quit"
 align = 1
 

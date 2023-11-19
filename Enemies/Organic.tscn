@@ -1,28 +1,26 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=14 format=3 uid="uid://bdasdwbcu4ya1"]
 
-[ext_resource path="res://Enemies/Organic.png" type="Texture" id=1]
-[ext_resource path="res://Stats.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Hurtbox.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Hitbox.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Enemies/SoftCollision.tscn" type="PackedScene" id=5]
+[ext_resource type="Texture2D" uid="uid://brlqll63p0pui" path="res://Enemies/Organic.png" id="1"]
+[ext_resource type="PackedScene" path="res://Stats.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://Hurtbox.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://Hitbox.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://Enemies/SoftCollision.tscn" id="5"]
 
-[sub_resource type="GDScript" id=5]
-script/source = "extends KinematicBody2D
+[sub_resource type="GDScript" id="5"]
+script/source = "extends CharacterBody2D
 
-onready var player = get_node(\"/root/World/Player\")
-onready var score = get_node(\"/root/World/CanvasLayer/ScoreUI\")
-onready var stats = $Stats
-onready var softCollision = $SoftCollision
+@onready var player = get_node(\"/root/World/Player\")
+@onready var score = get_node(\"/root/World/CanvasLayer/ScoreUI\")
+@onready var stats = $Stats
+@onready var softCollision = $SoftCollision
 
-export var ACCELERATION = 300
-export var MAX_SPEED = 50
-
-var velocity = Vector2.ZERO
+@export var ACCELERATION = 300
+@export var MAX_SPEED = 50
 
 func _ready():
 	if !is_instance_valid(player):
 		return
-	player.connect(\"player_hit\", self, \"queue_free\")
+	player.connect(\"player_hit\", Callable(self, \"queue_free\"))
 
 func _physics_process(delta):
 	if !is_instance_valid(player):
@@ -39,7 +37,9 @@ func _physics_process(delta):
 	
 	# TODO: avoid bullets
 	
-	velocity = move_and_slide(velocity)
+	set_velocity(velocity)
+	move_and_slide()
+	velocity = velocity
 
 func _on_Stats_no_health():
 	queue_free()
@@ -49,73 +49,76 @@ func _on_Hurtbox_body_entered(_body):
 	score.emit_signal(\"add_score\", stats.points)
 "
 
-[sub_resource type="AtlasTexture" id=2]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 32, 32 )
+[sub_resource type="AtlasTexture" id="2"]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id=3]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 32, 0, 32, 32 )
+[sub_resource type="AtlasTexture" id="3"]
+atlas = ExtResource("1")
+region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id=4]
-animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+[sub_resource type="SpriteFrames" id="4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("2")
+}, {
+"duration": 1.0,
+"texture": SubResource("3")
+}],
 "loop": true,
-"name": "Fly",
+"name": &"Fly",
 "speed": 3.0
-} ]
+}]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id="1"]
 radius = 6.08276
 
-[sub_resource type="CircleShape2D" id=6]
+[sub_resource type="CircleShape2D" id="6"]
 radius = 6.0
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id="7"]
 radius = 6.0
 
-[sub_resource type="CircleShape2D" id=8]
+[sub_resource type="CircleShape2D" id="8"]
 radius = 6.0
 
-[node name="Organic" type="KinematicBody2D"]
+[node name="Organic" type="CharacterBody2D"]
 collision_layer = 16
 collision_mask = 0
-script = SubResource( 5 )
+script = SubResource("5")
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 3.92699
-scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 4 )
-animation = "Fly"
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("4")
+animation = &"Fly"
 frame = 1
-playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
-[node name="Stats" parent="." instance=ExtResource( 2 )]
+[node name="Stats" parent="." instance=ExtResource("2")]
 points = 50
 
-[node name="Hurtbox" parent="." instance=ExtResource( 3 )]
+[node name="Hurtbox" parent="." instance=ExtResource("3")]
 collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
-[node name="Hitbox" parent="." instance=ExtResource( 4 )]
+[node name="Hitbox" parent="." instance=ExtResource("4")]
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 7 )
+shape = SubResource("7")
 
-[node name="SoftCollision" parent="." instance=ExtResource( 5 )]
+[node name="SoftCollision" parent="." instance=ExtResource("5")]
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
-shape = SubResource( 8 )
+shape = SubResource("8")
 
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]

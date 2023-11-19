@@ -1,14 +1,14 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://UI/lazer_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UI/lazer_font.tres" type="FontFile" id=1]
 
 [node name="Title" type="Label"]
-margin_top = 67.0
-margin_right = 120.0
-margin_bottom = 86.0
-custom_colors/font_color = Color( 0.909804, 0.223529, 0.223529, 1 )
-custom_colors/font_color_shadow = Color( 1, 0.909804, 0.909804, 1 )
-custom_fonts/font = ExtResource( 1 )
+offset_top = 67.0
+offset_right = 120.0
+offset_bottom = 86.0
+theme_override_colors/font_color = Color( 0.909804, 0.223529, 0.223529, 1 )
+theme_override_colors/font_shadow_color = Color( 1, 0.909804, 0.909804, 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "Spacer Shot"
 align = 1
 __meta__ = {

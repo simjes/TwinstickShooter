@@ -1,0 +1,11 @@
+res://default_env.tres
+res://UI/MainMenu.tscn
+res://Stats.gd
+res://Player/Bullet.gd
+res://Enemies/SpaceBird.gd
+res://Player/Player.gd
+res://PausePopup.gd
+res://UI/ScoreUI.gd
+res://UI/GameOverPopup.gd
+res://Enemies/Organic.tscn
+res://EnemySpawner.gd

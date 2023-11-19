@@ -5,9 +5,9 @@
 [ext_resource path="res://Hitbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Enemies/SoftCollision.tscn" type="PackedScene" id=4]
 
-[node name="Enemy" type="KinematicBody2D"]
+[node name="Enemy" type="CharacterBody2D"]
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 3.92699
 scale = Vector2( 0.5, 0.5 )
 animation = "Fly"
